@@ -13,8 +13,6 @@
 </template>
 
 <script>
-
-
 export default {
   //value = schemaData. v-model default prop is value
   props: {
@@ -40,6 +38,7 @@ export default {
 		clearInput() {
 		// this.value[this.schema.fieldName] = null
 			let initValue = null;
+			//vue instance name
 			switch (this.$options.name) {
 				case "TextInput":
 					initValue = "";

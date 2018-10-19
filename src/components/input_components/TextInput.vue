@@ -17,7 +17,7 @@ export default {
     schema: {
       type: Object,
       default() {
-        return {}
+				return {}
       }
     },
     value: {
