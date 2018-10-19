@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <fieldset>
+	<div>
+		<fieldset>
       <legend>{{ schema.label }}</legend>
 			<div v-if="showInputField">
 				<span v-for="(item, index) in schema.values" :key="index">
