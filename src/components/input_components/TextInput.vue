@@ -1,13 +1,13 @@
 
 <template>
-    <div> 
-			<fieldset>
-				<div v-if="showInputField">
-					<label v-bind:for="schema.fieldName">{{ schema.label }}</label>
-					<input id="text-input" type="text" v-bind:name="schema.fieldName" v-model="value[schema.fieldName]">
-				</div>  
-			</fieldset>
-    </div>
+  <div> 
+    <fieldset>
+      <div v-if="showInputField">
+        <label v-bind:for="schema.fieldName">{{ schema.label }}</label>
+        <input id="text-input" type="text" v-bind:name="schema.fieldName" v-model="value[schema.fieldName]">
+      </div>  
+    </fieldset>
+  </div>
 </template>
 
 <script>
@@ -35,7 +35,6 @@ export default {
 	},
 	methods: {
 		clearInput() {
-			
 		// this.value[this.schema.fieldName] = null
 			let initValue = null;
 			switch (this.$options.name) {
