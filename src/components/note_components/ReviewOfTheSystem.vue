@@ -5,7 +5,7 @@
 </template>
 
 <script>
- import Section from "../components/Section" 
+import Section from "../Section" 
 
 
 export default {
@@ -86,9 +86,3 @@ export default {
 <style>
 
 </style>
-
-
-
-
-// WEBPACK FOOTER //
-// ReviewOfTheSystem.vue

@@ -6,9 +6,9 @@
 </template>
 
 <script>
-import PersonalInfo from "./note_components/PersonalInfo"
-import PersonalHistory from "./note_components/PersonalHistory"
-import ReviewOfTheSystem from "./note_components/ReviewOfTheSystem"
+import PersonalInfo from "./components/note_components/PersonalInfo"
+import PersonalHistory from "./components/note_components/PersonalHistory"
+import ReviewOfTheSystem from "./components/note_components/ReviewOfTheSystem"
 
 
 export default {

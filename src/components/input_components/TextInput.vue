@@ -11,7 +11,6 @@
 </template>
 
 <script>
-
 export default {
 	name: "TextInput",
   props: {
@@ -66,7 +65,6 @@ export default {
 						return false
 					}
 				}
-
 				if (!(schemaAttrs.dependencies) || (this.value[schemaAttrs.dependencies.name] === schemaAttrs.dependencies.value)) {
 					return true
 				}else {
