@@ -1,14 +1,14 @@
 
 <template>
-  <div>     
-    <fieldset>     
+  <div>
+    <fieldset>
       <div v-if="showInputField">
         <div v-for="(item, index) in schema.values" :key="index">
           <input type="checkbox" :id="item" :value="item" v-model="value[schema.fieldName]">
           <label :for="item">{{ item }}</label>
         </div>
       </div>
-    </fieldset>            
+    </fieldset>
   </div>
 </template>
 
@@ -31,7 +31,7 @@ export default {
   },
   data () {
     return {
-      currentFieldName: this.schema.fieldName            
+      currentFieldName: this.schema.fieldName
     }
   },
   created: function() {

@@ -1,36 +1,36 @@
 
 <template>
-  <div> 
-    <fieldset>
-      <div v-if="showInputField">
-        <label v-bind:for="schema.fieldName">{{ schema.label }}</label>
-        <input id="text-input" type="text" v-bind:name="schema.fieldName" v-model="value[schema.fieldName]">
-      </div>  
-    </fieldset>
-  </div>
+	<div> 
+		<fieldset>
+			<div v-if="showInputField">
+				<label v-bind:for="schema.fieldName">{{ schema.label }}</label>
+				<input id="text-input" type="text" v-bind:name="schema.fieldName" v-model="value[schema.fieldName]">
+			</div>  
+		</fieldset>
+	</div>
 </template>
 
 <script>
 export default {
 	name: "TextInput",
-  props: {
-    schema: {
-      type: Object,
-      default() {
+	props: {
+		schema: {
+			type: Object,
+			default() {
 				return {}
-      }
-    },
-    value: {
-      type: Object,
-      default() {
-        return {}
-      }
-    }
-  },
-  data () {
-    return {
+			}
+		},
+		value: {
+			type: Object,
+			default() {
+				return {}
+			}
+		}
+	},
+	data () {
+		return {
 			currentFieldName: this.schema.fieldName
-    }
+		}
 	},
 	methods: {
 		clearInput() {
@@ -39,18 +39,18 @@ export default {
 			switch (this.$options.name) {
 				case "TextInput":
 					initValue = "";
-          this.$set(this.value, this.currentFieldName, initValue);
-          break;
+					this.$set(this.value, this.currentFieldName, initValue);
+					break;
 				case "CheckList":
 					initValue = [];
-          this.$set(this.value, this.currentFieldName, initValue);
-          break;
+					this.$set(this.value, this.currentFieldName, initValue);
+					break;
 				case "RadioInput":
 					initValue = "";
-          this.$set(this.value, this.currentFieldName, initValue);
-          break;
+					this.$set(this.value, this.currentFieldName, initValue);
+					break;
 			}
-    } 
+		} 
 	},
 	computed: {
 		showInputField() {

@@ -1,15 +1,15 @@
 <template>
-  <div>
-    <fieldset>
-      <legend>{{ schema.label }}</legend>
+	<div>
+		<fieldset>
+			<legend>{{ schema.label }}</legend>
 			<div v-if="showInputField">
 				<span v-for="(item, index) in schema.values" :key="index">
 					<input type="radio" :id="item" :value="item" v-model="value[schema.fieldName]">
 					<label :for="item">{{ item }}</label>
 				</span>
 			</div>
-    </fieldset>
-  </div>
+		</fieldset>
+	</div>
 </template>
 
 <script>
@@ -46,12 +46,12 @@ export default {
           break;
 				case "CheckList":
 					initValue = [];
-          this.$set(this.value, this.currentFieldName, initValue);
-          break;
+					this.$set(this.value, this.currentFieldName, initValue);
+					break;
 				case "RadioInput":
 					initValue = "";
-          this.$set(this.value, this.currentFieldName, initValue);
-          break;
+					this.$set(this.value, this.currentFieldName, initValue);
+					break;
 			}
     } 
 	},
