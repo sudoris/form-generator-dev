@@ -1,18 +1,16 @@
 
 <template>
-    
-		<div class="display-inline" v-if="showInputField">
-			<label 
-        :for="schema.attrs.fieldName">
-        {{ schema.attrs.label }}
-      </label>
-			<input 
-        id="number-input" 
-        type="number" 
-        :name="schema.attrs.fieldName" 
-        v-model="value[schema.attrs.fieldName]">
-		</div>      
-  
+  <div class="display-inline" v-if="showInputField">
+    <label
+      :for="schema.attrs.fieldName">
+      {{ schema.attrs.label }}
+    </label>
+    <input
+      id="number-input"
+      type="number"
+      :name="schema.attrs.fieldName" 
+      v-model="value[schema.attrs.fieldName]">
+  </div>
 </template>
 
 <script>

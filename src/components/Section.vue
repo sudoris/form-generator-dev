@@ -3,7 +3,10 @@
     <h2>{{ jsonSchema.title }}</h2>        
     <div v-for="(field, key) in jsonSchema.properties" :key="key">   
       <legend class="field-title">{{ field.title }}</legend>          
-      <component :is="getComponentName(field.attrs.fieldType)" v-bind:schema="field" v-model="jsonSchemaData" ></component>
+      <component 
+        :is="getComponentName(field.attrs.fieldType)"
+        :schema="field" 
+        v-model="jsonSchemaData" ></component>
     </div>
     <!-- {{ schemaData }}     -->
   </div>

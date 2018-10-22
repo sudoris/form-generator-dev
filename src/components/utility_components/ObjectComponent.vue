@@ -4,7 +4,7 @@
       <div v-for="(field, key) in schema.properties" :key="key">   
         <component 
           :is="getComponentName(field.attrs.fieldType)" 
-          v-bind:schema="field"
+          :schema="field"
           v-model="value[currentFieldName]">         
         </component>
       </div>
@@ -71,7 +71,6 @@ export default {
           return "SelectList"
         case "object": 
           return "ObjectComponent"
-
         case "number": 
           return "NumberComponent"
           

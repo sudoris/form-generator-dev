@@ -1,6 +1,6 @@
 <template>
   <div v-if="showInputField">
-    <div 
+    <div
       class="display-inline" 
       v-for="(item, index) in schema.attrs.values" 
       :key="index">
@@ -11,7 +11,7 @@
         v-model="value[schema.attrs.fieldName]">
       <label :for="item">{{ item }}</label>
     </div>
-  </div>              
+  </div>
 </template>
 
 <script>
