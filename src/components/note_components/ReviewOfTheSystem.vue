@@ -18,56 +18,70 @@ export default {
       schema: {
         $schema: "http://json-schema.org/draft-07/schema#",
         $id: "http://example.com/product.schema.json",
-        title: "Review of the system",
+        title: "Review of the System",
         description: "review of the system of the patient",
         type: "object",
           properties: {
             general: {
               description: "general review",
               type: "object",
-              fieldName: "general",
-              label: "General",
+              title: "General",                          
+              attrs: {
+                fieldName: "general",
+                fieldType: "object",                
+              },
               properties: {
                 state: {
                   description: "general state",
-                  type: "radio",
-                  fieldName: "state",
-                  label: "State",
-                  values: ["Normal", "Abnormal"]
+                  type: "string",                                                 
+                  attrs: {
+                    values: ["Normal", "Abnormal"],
+                    fieldType: "radio",
+                    fieldName: "state",
+                    label: "State"             
+                  }
                 },
                 abnormalities: {
                   description: "abnormalities of the patient",
-                  type: "checklist",
-                  fieldName: "abnormalities",
-                  values: [
-                    "dizziness",
-                    "Fainting", 
-                    "Insomnia",
-                    "Mental status change",
-                    "Weakness",
-                    "Numbness",
-                    "Convulsion",
-                    "Memory defect",
-                    "Tremor",
-                    "Gait disturbance",
-                    "Delusion",
-                    "Drug abuse",
-                    "Suicide attempt",
-                    "Hallucination",
-                    "Stress",
-                    "Nervousness",
-                    "Depression",
-                    "Others",
-                  ]
-                },
-                others: {
-                  description: "abnormalities of the patient",
-                  type: "text",
-                  fieldName: "others",
+                  type: "string",
                   attrs: {
-                    dependencies: {
+                    fieldType: "checklist",
+                    fieldName: "abnormalities",
+                    values: [
+                      "dizziness",
+                      "Fainting", 
+                      "Insomnia",
+                      "Mental status change",
+                      "Weakness",
+                      "Numbness",
+                      "Convulsion",
+                      "Memory defect",
+                      "Tremor",
+                      "Gait disturbance",
+                      "Delusion",
+                      "Drug abuse",
+                      "Suicide attempt",
+                      "Hallucination",
+                      "Stress",
+                      "Nervousness",
+                      "Depression",
+                      "Other",
+                    ],
+                    dependsOn: {
+                      name: "state",
+                      value: "Abnormal"
+                    }
+                  }                                  
+                },
+                other: {
+                  description: "abnormalities of the patient",
+                  type: "string",                  
+                  attrs: {
+                    fieldType: "text",
+                    fieldName: "other",
+                    dependsOn: {                      
                       name: "abnormalities",
-                      value: "Others"
+                      value: "Other"
                     }
                   }
                 }

@@ -1,28 +1,32 @@
 <template>
-  <div>    
+  
     <div v-if="showInputField"> 
       <div v-for="(field, key) in schema.properties" :key="key">   
         <component 
-          :is="getComponentName(field.type)" 
+          :is="getComponentName(field.attrs.fieldType)" 
           v-bind:schema="field"
           v-model="value[currentFieldName]">         
         </component>
       </div>
+      <br>
     </div>
-  </div>
+    
+  
 </template>
 
 <script>
 import TextInput from "../input_components/TextInput"
 import RadioInput from "../input_components/RadioInput"
 import CheckList from "../input_components/CheckList"
+import NumberInput from "../input_components/NumberInput"
 
 export default {
   name: 'ObjectComponent',
   components: {
     TextInput,
     RadioInput,
-    CheckList
+    CheckList,
+    NumberInput
   },
   props: {
     schema: {
@@ -40,7 +44,7 @@ export default {
   },
   data () {
       return {
-          currentFieldName: this.schema.fieldName
+          currentFieldName: this.schema.attrs.fieldName
       }
   },
   created() {
@@ -65,10 +69,14 @@ export default {
 
         case "object": 
           return "ObjectComponent"
+
+        case "number": 
+          return "NumberComponent"
+          
       }
     },
     clearInput() {
-    // this.value[this.schema.fieldName] = null
+    // this.value[this.schema.attrs.fieldName] = null
       if ((this.currentFieldName in this.value)) {
         this.$set(this.value, this.currentFieldName, {});
       }
@@ -78,7 +86,7 @@ export default {
     showInputField() {
       let schemaAttrs = this.schema.attrs
       if (schemaAttrs) {
-        if (!(schemaAttrs.dependencies) || (this.value[schemaAttrs.dependencies.name] === schemaAttrs.dependencies.value)) {
+        if (!(schemaAttrs.dependsOn) || (this.value[schemaAttrs.dependsOn.name] === schemaAttrs.dependsOn.value)) {
           return true
           }else {
             this.clearInput()

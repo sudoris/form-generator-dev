@@ -1,13 +1,11 @@
 
 <template>
-	<div> 
-		<fieldset>
-			<div v-if="showInputField">
-				<label v-bind:for="schema.fieldName">{{ schema.label }}</label>
-				<input id="text-input" type="text" v-bind:name="schema.fieldName" v-model="value[schema.fieldName]">
-			</div>  
-		</fieldset>
-	</div>
+  <div> 
+		<div class="display-inline" v-if="showInputField">
+			<label v-bind:for="schema.attrs.fieldName">{{ schema.attrs.label }}</label>
+			<input id="text-input" type="text" v-bind:name="schema.attrs.fieldName" v-model="value[schema.attrs.fieldName]">
+		</div>  
+  </div>
 </template>
 
 <script>
@@ -18,23 +16,23 @@ export default {
 			type: Object,
 			default() {
 				return {}
-			}
-		},
-		value: {
-			type: Object,
-			default() {
-				return {}
-			}
-		}
-	},
-	data () {
-		return {
-			currentFieldName: this.schema.fieldName
-		}
+      }
+    },
+    value: {
+      type: Object,
+      default() {
+        return {}
+      }
+    }
+  },
+  data () {
+    return {
+			currentFieldName: this.schema.attrs.fieldName
+    }
 	},
 	methods: {
 		clearInput() {
-		// this.value[this.schema.fieldName] = null
+		// this.value[this.schema.attrs.fieldName] = null
 			let initValue = null;
 			switch (this.$options.name) {
 				case "TextInput":
@@ -55,17 +53,17 @@ export default {
 	computed: {
 		showInputField() {
 			let schemaAttrs = this.schema.attrs;
-			//dependencies name is Array?
+			//dependsOn name is Array?
 			if (schemaAttrs) {
-				if(schemaAttrs.dependencies && Array.isArray(this.value[schemaAttrs.dependencies.name])){
-					if(this.value[schemaAttrs.dependencies.name].indexOf(schemaAttrs.dependencies.value) !== -1){
+				if(schemaAttrs.dependsOn && Array.isArray(this.value[schemaAttrs.dependsOn.name])){
+					if(this.value[schemaAttrs.dependsOn.name].indexOf(schemaAttrs.dependsOn.value) !== -1){
 						return true
 					}else {
 						this.clearInput()
 						return false
 					}
 				}
-				if (!(schemaAttrs.dependencies) || (this.value[schemaAttrs.dependencies.name] === schemaAttrs.dependencies.value)) {
+				if (!(schemaAttrs.dependsOn) || (this.value[schemaAttrs.dependsOn.name] === schemaAttrs.dependsOn.value)) {
 					return true
 				}else {
 					this.clearInput()
