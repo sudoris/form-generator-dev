@@ -41,7 +41,7 @@ export default {
               label: "Age",              
               dependsOn: {
                 name: "name",
-                value: "david"
+                values: ["david"]
               }
             }
           },
@@ -54,7 +54,7 @@ export default {
               label: "Date of birth",
               // dependsOn: {
               //   name: "name",
-              //   value: "david"
+              //   values: ["david"]
               // }
             }
           }
@@ -70,6 +70,3 @@ export default {
 <style>
 
 </style>
-
-
-

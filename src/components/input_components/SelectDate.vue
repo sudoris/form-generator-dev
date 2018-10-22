@@ -4,10 +4,11 @@
     
       <div class="display-inline" v-if="showInputField">
         <label v-bind:for="schema.attrs.fieldName">{{ schema.attrs.label }}</label>
-        <input id="number-input" 
-               type="date" 
-               v-bind:name="schema.attrs.fieldName" 
-               v-model="value[schema.attrs.fieldName]">
+        <input 
+          id="number-input" 
+          type="date" 
+          v-bind:name="schema.attrs.fieldName" 
+          v-model="value[schema.attrs.fieldName]">
       </div>  
     
   </div>

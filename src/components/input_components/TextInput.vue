@@ -1,10 +1,18 @@
 
+import { exists } from 'fs';
 <template>
   <div> 
 		<div class="display-inline" v-if="showInputField">
-			<label v-bind:for="schema.attrs.fieldName">{{ schema.attrs.label }}</label>
-			<input id="text-input" type="text" v-bind:name="schema.attrs.fieldName" v-model="value[schema.attrs.fieldName]">
-		</div>  
+			<label 
+				:for="schema.attrs.fieldName">
+				{{ schema.attrs.label }}
+			</label>
+			<input 
+				id="text-input" 
+				type="text" 
+				:name="schema.attrs.fieldName" 
+				v-model="value[schema.attrs.fieldName]">
+		</div>
   </div>
 </template>
 
@@ -27,6 +35,7 @@ export default {
   },
   data () {
     return {
+			placeholder: this.getPlaceholder(),
 			currentFieldName: this.schema.attrs.fieldName
     }
 	},
@@ -48,30 +57,47 @@ export default {
 					this.$set(this.value, this.currentFieldName, initValue);
 					break;
 			}
-		} 
+		},
+		getPlaceholder() {
+			if(typeof this.schema.attrs !== 'undefined') {
+				if(typeof this.schema.attrs.placeholder !== 'undefined') {
+					return this.schema.attrs.placeholder
+				}
+			}	
+			return ""
+		}
 	},
 	computed: {
 		showInputField() {
 			let schemaAttrs = this.schema.attrs;
 			//dependsOn name is Array?
-			if (schemaAttrs) {
-				if(schemaAttrs.dependsOn && Array.isArray(this.value[schemaAttrs.dependsOn.name])){
-					if(this.value[schemaAttrs.dependsOn.name].indexOf(schemaAttrs.dependsOn.value) !== -1){
-						return true
-					}else {
-						this.clearInput()
-						return false
+			if(typeof schemaAttrs !== 'undefined'){
+				if(typeof schemaAttrs.dependsOn !== 'undefined'){
+					if(typeof schemaAttrs.dependsOn.values !== 'undefined' && typeof schemaAttrs.dependsOn.name !== 'undefined'){
+						if(Array.isArray(this.value[schemaAttrs.dependsOn.name])){
+							for(let i = 0; i < schemaAttrs.dependsOn.values.length; i++) {
+								if(this.value[schemaAttrs.dependsOn.name].indexOf(schemaAttrs.dependsOn.values[i]) !== -1){
+									return true
+								}else {
+									this.clearInput()
+									return false
+								}
+							}
+						}else {
+							if(schemaAttrs.dependsOn.values.indexOf(this.value[schemaAttrs.dependsOn.name]) !== -1){
+								return true
+							}else {
+								this.clearInput()
+								return false
+							}
+						}
 					}
-				}
-				if (!(schemaAttrs.dependsOn) || (this.value[schemaAttrs.dependsOn.name] === schemaAttrs.dependsOn.value)) {
 					return true
-				}else {
-					this.clearInput()
-					return false
-				}	
+				}
+				return true
 			}
 			return true
-		}
+		},
 	}
 }
 </script>

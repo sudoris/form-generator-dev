@@ -47,7 +47,7 @@ export default {
                   attrs: {
                     dependsOn: {
                       name: "smoking",
-                      value: "Yes"
+                      values: ["Yes"]
                     },
                     fieldType: "checklist",
                     fieldName: "species",
@@ -78,12 +78,11 @@ export default {
                 }
               }
             }
-          },
-        required: [ "productId" ]
-      }
+          }
+        },
+      required: [ "productId" ]
     }
-  },
-
+  }
 }
 </script>
 

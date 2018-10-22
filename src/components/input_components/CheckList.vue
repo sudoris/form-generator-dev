@@ -1,9 +1,16 @@
 <template>
   <div v-if="showInputField">
-      <div class="display-inline" v-for="(item, index) in schema.attrs.values" :key="index">
-        <input type="checkbox" :id="item" :value="item" v-model="value[schema.attrs.fieldName]">
-        <label :for="item">{{ item }}</label>
-      </div>
+    <div 
+      class="display-inline" 
+      v-for="(item, index) in schema.attrs.values" 
+      :key="index">
+      <input 
+        type="checkbox" 
+        :id="item" 
+        :value="item" 
+        v-model="value[schema.attrs.fieldName]">
+      <label :for="item">{{ item }}</label>
+    </div>
   </div>              
 </template>
 
@@ -57,31 +64,39 @@ export default {
           this.$set(this.value, this.currentFieldName, initValue);
           break;
 			}
-		} 
+    } 
 	},
 	computed: {
 		showInputField() {
 			let schemaAttrs = this.schema.attrs;
 			//dependsOn name is Array?
-			if (schemaAttrs) {
-				if(schemaAttrs.dependsOn && Array.isArray(this.value[schemaAttrs.dependsOn.name])){
-					if(this.value[schemaAttrs.dependsOn.name].indexOf(schemaAttrs.dependsOn.value) !== -1){
-						return true
-					}else {
-						this.clearInput()
-						return false
+			if(typeof schemaAttrs !== 'undefined'){
+				if(typeof schemaAttrs.dependsOn !== 'undefined'){
+					if(typeof schemaAttrs.dependsOn.values !== 'undefined' && typeof schemaAttrs.dependsOn.name !== 'undefined'){
+						if(Array.isArray(this.value[schemaAttrs.dependsOn.name])){
+							for(let i = 0; i < schemaAttrs.dependsOn.values.length; i++) {
+								if(this.value[schemaAttrs.dependsOn.name].indexOf(schemaAttrs.dependsOn.values[i]) !== -1){
+									return true
+								}else {
+									this.clearInput()
+									return false
+								}
+							}
+						}else {
+							if(schemaAttrs.dependsOn.values.indexOf(this.value[schemaAttrs.dependsOn.name]) !== -1){
+								return true
+							}else {
+								this.clearInput()
+								return false
+							}
+						}
 					}
-				}else {
-					if (!(schemaAttrs.dependsOn) || (this.value[schemaAttrs.dependsOn.name] === schemaAttrs.dependsOn.value)) {
-						return true
-					}else {
-						this.clearInput()
-						return false
-					}	
+					return true
 				}
+				return true
 			}
 			return true
-		}
+		},
 	}
 }
 </script>

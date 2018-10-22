@@ -69,7 +69,7 @@ export default {
                     ],
                     dependsOn: {
                       name: "state",
-                      value: "Abnormal"
+                      values: ["Abnormal"]
                     }
                   }                                  
                 },
@@ -81,11 +81,10 @@ export default {
                     fieldName: "other",
                     dependsOn: {                      
                       name: "abnormalities",
-                      value: "Other"
+                      values: ["Other"]
                     }
                   }
                 }
-
               }
             }
           },

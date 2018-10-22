@@ -1,14 +1,10 @@
 <template>
   <div>
-    
-      <h2>{{ jsonSchema.title }}</h2>        
-      <div v-for="(field, key) in jsonSchema.properties" :key="key">   
-                   
-          <legend class="field-title">{{ field.title }}</legend>          
-          <component :is="getComponentName(field.attrs.fieldType)" v-bind:schema="field" v-model="jsonSchemaData" ></component>
-        
-      </div>
-    
+    <h2>{{ jsonSchema.title }}</h2>        
+    <div v-for="(field, key) in jsonSchema.properties" :key="key">   
+      <legend class="field-title">{{ field.title }}</legend>          
+      <component :is="getComponentName(field.attrs.fieldType)" v-bind:schema="field" v-model="jsonSchemaData" ></component>
+    </div>
     <!-- {{ schemaData }}     -->
   </div>
 </template>
@@ -19,6 +15,7 @@ import RadioInput from "./input_components/RadioInput"
 import CheckList from "./input_components/CheckList"
 import NumberInput from "./input_components/NumberInput"
 import SelectDate from "./input_components/SelectDate"
+import SelectList from "./input_components/SelectList"
 import ObjectComponent from "./utility_components/ObjectComponent"
 
 export default {
@@ -29,7 +26,8 @@ export default {
     ObjectComponent,    
     CheckList,
     NumberInput,
-    SelectDate
+    SelectDate,
+    SelectList
   },
   props: {
     schema: {
@@ -59,13 +57,12 @@ export default {
       switch (type) {
         case "text":
           return "TextInput"
-
         case "radio":
           return "RadioInput"
-
         case "checklist":
           return "CheckList"
-          
+        case "selectList":
+          return "SelectList"
         case "object": 
           return "ObjectComponent"
 
@@ -86,9 +83,6 @@ export default {
 }
 .display-inline {
 	display: inline-block;
-}
-fieldset {
-  /* border: none; */
 }
 body {
   margin-left: 2%;

@@ -2,8 +2,15 @@
 <template>
     
 		<div class="display-inline" v-if="showInputField">
-			<label v-bind:for="schema.attrs.fieldName">{{ schema.attrs.label }}</label>
-			<input id="number-input" type="number" v-bind:name="schema.attrs.fieldName" v-model="value[schema.attrs.fieldName]">
+			<label 
+        :for="schema.attrs.fieldName">
+        {{ schema.attrs.label }}
+      </label>
+			<input 
+        id="number-input" 
+        type="number" 
+        :name="schema.attrs.fieldName" 
+        v-model="value[schema.attrs.fieldName]">
 		</div>      
   
 </template>
@@ -58,25 +65,34 @@ export default {
 		showInputField() {
 			let schemaAttrs = this.schema.attrs;
 			//dependsOn name is Array?
-			if (schemaAttrs) {
-				if(schemaAttrs.dependsOn && Array.isArray(this.value[schemaAttrs.dependsOn.name])){
-					if(this.value[schemaAttrs.dependsOn.name].indexOf(schemaAttrs.dependsOn.value) !== -1){
-						return true
-					}else {
-						this.clearInput()
-						return false
+			if(typeof schemaAttrs !== 'undefined'){
+				if(typeof schemaAttrs.dependsOn !== 'undefined'){
+					if(typeof schemaAttrs.dependsOn.values !== 'undefined' && typeof schemaAttrs.dependsOn.name !== 'undefined'){
+						if(Array.isArray(this.value[schemaAttrs.dependsOn.name])){
+							for(let i = 0; i < schemaAttrs.dependsOn.values.length; i++) {
+								if(this.value[schemaAttrs.dependsOn.name].indexOf(schemaAttrs.dependsOn.values[i]) !== -1){
+									return true
+								}else {
+									this.clearInput()
+									return false
+								}
+							}
+						}else {
+							if(schemaAttrs.dependsOn.values.indexOf(this.value[schemaAttrs.dependsOn.name]) !== -1){
+								return true
+							}else {
+								this.clearInput()
+								return false
+							}
+						}
 					}
-				}
-				if (!(schemaAttrs.dependsOn) || (this.value[schemaAttrs.dependsOn.name] === schemaAttrs.dependsOn.value)) {
 					return true
-				}else {
-					this.clearInput()
-					return false
-				}	
+				}
+				return true
 			}
 			return true
-		}
-	}
+		},
+	} 
 }
 </script>
 
