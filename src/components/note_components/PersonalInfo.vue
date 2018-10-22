@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div>    
     <Section :schema="schema" :schemaData="schemaData"></Section>
   </div>
 </template>
@@ -23,10 +23,40 @@ export default {
         type: "object",
         properties: {
           name: {
-            description: "",// legend data
-            type: "text",//type of input
-            fieldName: "name",//schemaData key
-            label: "Name",// label data
+            description: "", // legend data
+            type: "string", //type of input            
+            attrs: {
+              fieldName: "name",
+              fieldType: "text",
+              label: "Name",
+              title: "fleajlfajljfi"
+            }
+          },
+          age: {
+            description: "", // legend data
+            type: "integer", //type of input            
+            attrs: {
+              fieldName: "age",
+              fieldType: "number",
+              label: "Age",              
+              dependsOn: {
+                name: "name",
+                value: "david"
+              }
+            }
+          },
+          date: {
+            description: "", // legend data
+            type: "string", //type of input            
+            attrs: {
+              fieldName: "date",
+              fieldType: "date",
+              label: "Date of birth",
+              // dependsOn: {
+              //   name: "name",
+              //   value: "david"
+              // }
+            }
           }
         },
         required: [ "productId" ]
@@ -43,6 +73,3 @@ export default {
 
 
 
-
-// WEBPACK FOOTER //
-// PersonalInfo.vue

@@ -2,6 +2,9 @@
   <div id="app">    
     <PersonalHistory></PersonalHistory>
     <ReviewOfTheSystem></ReviewOfTheSystem>
+    <PersonalInfo></PersonalInfo>  
+    <br>
+    
   </div>
 </template>
 

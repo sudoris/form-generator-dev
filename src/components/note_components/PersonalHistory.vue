@@ -20,33 +20,61 @@ export default {
         $id: "http://example.com/product.schema.json",
         title: "Personal History",
         description: "Personal history of the patient",
-        type: "object",
+        type: "object",        
           properties: {
             habits: {
               description: "habits of the patient",
-              type: "object",
-              fieldName: "habits",
-              label: "Habits",
+              type: "object",              
+              title: "Habits",
+              attrs: {
+                fieldType: "object",
+                fieldName: "habits"                
+              },
               properties: {
                 smoking: {
                   description: "smoking habit",
-                  type: "radio",
-                  fieldName: "smoking",
-                  label: "Smoking",
-                  values: ["No", "Yes"]
+                  type: "string",                  
+                  attrs: {
+                    fieldType: "radio",
+                    label: "Smoking",
+                    values: ["Yes", "No"],
+                    fieldName: "smoking"
+                  }
                 },
                 species: {
                   description: "cigarette species",
-                  type: "checklist",
-                  fieldName: "species",
-                  label: "Species",
-                  values: ["Cigarettes", "Electronic cigarettes"],
+                  type: "array",                  
                   attrs: {
-                    dependencies: {
+                    dependsOn: {
                       name: "smoking",
                       value: "Yes"
-                    }
+                    },
+                    fieldType: "checklist",
+                    fieldName: "species",
+                    label: "Species",
+                    values: ["Cigarettes", "Electronic cigarettes"]
                   }                  
+                }
+              }
+            },
+            things: {
+              description: "blah blah blah",
+              type: "object",              
+              title: "Exercise",
+              attrs: {
+                fieldType: "object",
+                fieldName: "things"                
+              },
+              properties: {
+                exercise: {
+                  description: "exercise habits",
+                  type: "string",                  
+                  attrs: {
+                    fieldType: "radio",
+                    label: "More than once a week",
+                    values: ["Yes", "No"],
+                    fieldName: "exercise"
+                  }
                 }
               }
             }

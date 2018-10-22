@@ -1,15 +1,15 @@
 <template>
-	<div>
-		<fieldset>
-      <legend>{{ schema.label }}</legend>
-			<div v-if="showInputField">
-				<span v-for="(item, index) in schema.values" :key="index">
-					<input type="radio" :id="item" :value="item" v-model="value[schema.fieldName]">
+	     
+	<div v-if="showInputField">
+		
+			<label>{{ schema.attrs.label }}</label>
+				<div class="display-inline" v-for="(item, index) in schema.attrs.values" :key="index">
+					<input type="radio" :id="item" :value="item" v-model="value[schema.attrs.fieldName]">
 					<label :for="item">{{ item }}</label>
-				</span>
-			</div>
-    </fieldset>
-  </div>
+				</div>
+		
+	</div>    
+  
 </template>
 
 <script>
@@ -31,7 +31,7 @@ export default {
   },
   data () {
     return {
-			currentFieldName: this.schema.fieldName
+			currentFieldName: this.schema.attrs.fieldName
     }
 	},
 	methods: {
@@ -58,20 +58,19 @@ export default {
 	computed: {
 		showInputField() {
 			let schemaAttrs = this.schema.attrs;
-			//dependencies name is Array?
+			//dependsOn name is Array?
 			if (schemaAttrs) {
-				if(schemaAttrs.dependencies && Array.isArray(this.value[schemaAttrs.dependencies.name])){
-					if(this.value[schemaAttrs.dependencies.name].indexOf(schemaAttrs.dependencies.value) !== -1){
+				if(schemaAttrs.dependsOn && Array.isArray(this.value[schemaAttrs.dependsOn.name])){
+					if(this.value[schemaAttrs.dependsOn.name].indexOf(schemaAttrs.dependsOn.value) !== -1){
 						return true
-					}else {
+					} else {
 						this.clearInput()
 						return false
 					}
 				}
-
-				if (!(schemaAttrs.dependencies) || (this.value[schemaAttrs.dependencies.name] === schemaAttrs.dependencies.value)) {
+				if (!(schemaAttrs.dependsOn) || (this.value[schemaAttrs.dependsOn.name] === schemaAttrs.dependsOn.value)) {
 					return true
-				}else {
+				} else {
 					this.clearInput()
 					return false
 				}	
@@ -83,5 +82,7 @@ export default {
 </script>
 
 <style>
- 
+/* .display-inline {
+	display: inline;
+}  */
 </style>
