@@ -27,6 +27,9 @@ export default {
             type: "text",//type of input
             fieldName: "name",//schemaData key
             label: "Name",// label data
+            attrs: {
+              placeholder: "Your name"
+            }
           }
         },
         required: [ "productId" ]
@@ -40,9 +43,3 @@ export default {
 <style>
 
 </style>
-
-
-
-
-// WEBPACK FOOTER //
-// PersonalInfo.vue

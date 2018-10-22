@@ -1,10 +1,17 @@
 
+import { exists } from 'fs';
 <template>
   <div> 
     <fieldset>
       <div v-if="showInputField">
-        <label v-bind:for="schema.fieldName">{{ schema.label }}</label>
-        <input id="text-input" type="text" v-bind:name="schema.fieldName" v-model="value[schema.fieldName]">
+        <label :for="schema.fieldName">{{ schema.label }}</label>
+        <input 
+					id="text-input" 
+					type="text" 
+					:name="schema.fieldName"
+					:placeholder="placeholder"
+					v-model="value[schema.fieldName]"
+					>
       </div>  
     </fieldset>
   </div>
@@ -29,6 +36,8 @@ export default {
   },
   data () {
     return {
+			// need to sort out methods
+			placeholder: this.getPlaceholder(),
 			currentFieldName: this.schema.fieldName
     }
 	},
@@ -50,30 +59,47 @@ export default {
           this.$set(this.value, this.currentFieldName, initValue);
           break;
 			}
-    } 
+		},
+		getPlaceholder() {
+			if(typeof this.schema.attrs !== 'undefined') {
+				if(typeof this.schema.attrs.placeholder !== 'undefined') {
+					return this.schema.attrs.placeholder
+				}
+			}	
+			return ""
+		}
 	},
 	computed: {
 		showInputField() {
 			let schemaAttrs = this.schema.attrs;
 			//dependencies name is Array?
-			if (schemaAttrs) {
-				if(schemaAttrs.dependencies && Array.isArray(this.value[schemaAttrs.dependencies.name])){
-					if(this.value[schemaAttrs.dependencies.name].indexOf(schemaAttrs.dependencies.value) !== -1){
-						return true
-					}else {
-						this.clearInput()
-						return false
+			if(typeof this.schema.attrs !== 'undefined'){
+				if(typeof this.schema.attrs.dependencies !== 'undefined'){
+					if(typeof this.schema.attrs.dependencies.values !== 'undefined' && typeof this.schema.attrs.dependencies.name !== 'undefined'){
+						if(Array.isArray(this.value[schemaAttrs.dependencies.name])){
+							for(let i = 0; i < schemaAttrs.dependencies.values.length; i++) {
+								if(this.value[schemaAttrs.dependencies.name].indexOf(schemaAttrs.dependencies.values[i]) !== -1){
+									return true
+								}else {
+									this.clearInput()
+									return false
+								}
+							}
+						}else {
+							if(this.schema.attrs.dependencies.values.indexOf(this.value[this.schema.attrs.dependencies.name]) !== -1){
+								return true
+							}else {
+								this.clearInput()
+								return false
+							}
+						}
 					}
-				}
-				if (!(schemaAttrs.dependencies) || (this.value[schemaAttrs.dependencies.name] === schemaAttrs.dependencies.value)) {
 					return true
-				}else {
-					this.clearInput()
-					return false
-				}	
+				}
+				return true
 			}
 			return true
-		}
+		},
 	}
 }
 </script>

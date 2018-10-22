@@ -67,7 +67,7 @@ export default {
                   attrs: {
                     dependencies: {
                       name: "abnormalities",
-                      value: "Others"
+                      values: ["Others"]
                     }
                   }
                 }

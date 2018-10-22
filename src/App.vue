@@ -1,5 +1,6 @@
 <template>
   <div id="app">    
+    <PersonalInfo></PersonalInfo>
     <PersonalHistory></PersonalHistory>
     <ReviewOfTheSystem></ReviewOfTheSystem>
   </div>

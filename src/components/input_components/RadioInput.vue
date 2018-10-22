@@ -4,7 +4,11 @@
       <legend>{{ schema.label }}</legend>
 			<div v-if="showInputField">
 				<span v-for="(item, index) in schema.values" :key="index">
-					<input type="radio" :id="item" :value="item" v-model="value[schema.fieldName]">
+					<input 
+						type="radio" 
+						:id="item" 
+						:value="item" 
+						v-model="value[schema.fieldName]">
 					<label :for="item">{{ item }}</label>
 				</span>
 			</div>
@@ -14,6 +18,7 @@
 
 <script>
 export default {
+	name: "RadioInput",
   //value = schemaData. v-model default prop is value
   props: {
     schema: {
@@ -53,31 +58,39 @@ export default {
           this.$set(this.value, this.currentFieldName, initValue);
           break;
 			}
-    } 
+		} 
 	},
 	computed: {
 		showInputField() {
 			let schemaAttrs = this.schema.attrs;
 			//dependencies name is Array?
-			if (schemaAttrs) {
-				if(schemaAttrs.dependencies && Array.isArray(this.value[schemaAttrs.dependencies.name])){
-					if(this.value[schemaAttrs.dependencies.name].indexOf(schemaAttrs.dependencies.value) !== -1){
-						return true
-					}else {
-						this.clearInput()
-						return false
+			if(typeof this.schema.attrs !== 'undefined'){
+				if(typeof this.schema.attrs.dependencies !== 'undefined'){
+					if(typeof this.schema.attrs.dependencies.values !== 'undefined' && typeof this.schema.attrs.dependencies.name !== 'undefined'){
+						if(Array.isArray(this.value[schemaAttrs.dependencies.name])){
+							for(let i = 0; i < schemaAttrs.dependencies.values.length; i++) {
+								if(this.value[schemaAttrs.dependencies.name].indexOf(schemaAttrs.dependencies.values[i]) !== -1){
+									return true
+								}else {
+									this.clearInput()
+									return false
+								}
+							}
+						}else {
+							if(this.schema.attrs.dependencies.values.indexOf(this.value[this.schema.attrs.dependencies.name]) !== -1){
+								return true
+							}else {
+								this.clearInput()
+								return false
+							}
+						}
 					}
-				}
-
-				if (!(schemaAttrs.dependencies) || (this.value[schemaAttrs.dependencies.name] === schemaAttrs.dependencies.value)) {
 					return true
-				}else {
-					this.clearInput()
-					return false
-				}	
+				}
+				return true
 			}
 			return true
-		}
+		},
 	}
 }
 </script>

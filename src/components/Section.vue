@@ -14,6 +14,7 @@
 import TextInput from "./input_components/TextInput"
 import RadioInput from "./input_components/RadioInput"
 import CheckList from "./input_components/CheckList"
+import SelectList from "./input_components/SelectList"
 import ObjectComponent from "./utility_components/ObjectComponent"
 
 export default {
@@ -23,6 +24,7 @@ export default {
     RadioInput,
     ObjectComponent,    
     CheckList,
+    SelectList
   },
   props: {
     schema: {
@@ -51,13 +53,12 @@ export default {
       switch (type) {
         case "text":
           return "TextInput"
-
         case "radio":
           return "RadioInput"
-
         case "checklist":
           return "CheckList"
-          
+        case "selectList":
+          return "SelectList"
         case "object": 
           return "ObjectComponent"
       }
