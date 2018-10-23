@@ -1,24 +1,22 @@
 <template>
-  
-    <div v-if="showInputField"> 
-      <div v-for="(field, key) in schema.properties" :key="key">   
-        <component 
-          :is="getComponentName(field.attrs.fieldType)" 
-          :schema="field"
-          v-model="value[currentFieldName]">         
-        </component>
-      </div>
-      <br>
+  <div v-if="showInputField"> 
+    <div v-for="(field, key) in schema.properties" :key="key">   
+      <component 
+        :is="getComponentName(field.attrs.fieldType)" 
+        :schema="field"
+        v-model="value[currentFieldName]">         
+      </component>
     </div>
-    
-  
+  </div>
 </template>
 
 <script>
 import TextInput from "../input_components/TextInput"
 import RadioInput from "../input_components/RadioInput"
+import Checkbox from "../input_components/Checkbox"
 import CheckList from "../input_components/CheckList"
 import NumberInput from "../input_components/NumberInput"
+import SelectDate from "../input_components/SelectDate"
 import SelectList from "../input_components/SelectList"
 
 
@@ -27,9 +25,11 @@ export default {
   components: {
     TextInput,
     RadioInput,
+    Checkbox,
     CheckList,
     NumberInput,
-    SelectList
+    SelectList,
+    SelectDate,
   },
   props: {
     schema: {
@@ -65,15 +65,18 @@ export default {
           return "TextInput"
         case "radio":
           return "RadioInput"
+        case "checkbox":
+          return "Checkbox"
         case "checklist":
           return "CheckList"
-        case "selectlist":
+        case "selectList":
           return "SelectList"
         case "object": 
           return "ObjectComponent"
         case "number": 
-          return "NumberComponent"
-          
+          return "NumberInput"
+        case "date": 
+          return "SelectDate"
       }
     },
     clearInput() {

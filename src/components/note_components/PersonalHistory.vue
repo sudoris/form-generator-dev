@@ -9,6 +9,7 @@ import Section from "../Section"
 
 
 export default {
+  name: "PersonalHistory",
   components: {
     Section
   },

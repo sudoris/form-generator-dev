@@ -1,25 +1,17 @@
 <template>
-  <div id="app">    
-    <PersonalInfo></PersonalInfo>
-    <PersonalHistory></PersonalHistory>
-    <ReviewOfTheSystem></ReviewOfTheSystem>
-    <br>
-    
+  <div id="app">
+      <router-link :to="{ name: 'personalInfo' }">PersonalInfo</router-link> |
+      <router-link :to="{ name: 'personalHistory' }">PersonalHistory</router-link> |
+      <router-link :to="{ name: 'reviewOfTheSystem' }">ReviewOfTheSystem</router-link> |
+    <router-view/>
   </div>
 </template>
 
 <script>
-import PersonalInfo from "./components/note_components/PersonalInfo"
-import PersonalHistory from "./components/note_components/PersonalHistory"
-import ReviewOfTheSystem from "./components/note_components/ReviewOfTheSystem"
+
 
 
 export default {
-  components: {
-    PersonalHistory,
-    PersonalInfo,
-    ReviewOfTheSystem
-  },
   data() {
     return {
 

@@ -9,6 +9,7 @@ import Section from "../Section"
 
 
 export default {
+  name: "PersonalInfo",
   components: {
     Section
   },
@@ -38,7 +39,7 @@ export default {
             attrs: {
               fieldName: "age",
               fieldType: "number",
-              label: "Age",              
+              label: "Age",
               dependsOn: {
                 name: "name",
                 values: ["david"]

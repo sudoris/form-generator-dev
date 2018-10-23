@@ -9,6 +9,7 @@ import Section from "../Section"
 
 
 export default {
+  name: "ReviewOfTheSystem",
   components: {
     Section
   },

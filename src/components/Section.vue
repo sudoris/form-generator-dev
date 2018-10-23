@@ -15,6 +15,7 @@
 <script>
 import TextInput from "./input_components/TextInput"
 import RadioInput from "./input_components/RadioInput"
+import Checkbox from "./input_components/Checkbox"
 import CheckList from "./input_components/CheckList"
 import NumberInput from "./input_components/NumberInput"
 import SelectDate from "./input_components/SelectDate"
@@ -26,11 +27,12 @@ export default {
   components: {
     TextInput,
     RadioInput,
-    ObjectComponent,    
+    Checkbox,
     CheckList,
     NumberInput,
     SelectDate,
-    SelectList
+    SelectList,
+    ObjectComponent
   },
   props: {
     schema: {
@@ -62,16 +64,16 @@ export default {
           return "TextInput"
         case "radio":
           return "RadioInput"
+        case "checkbox":
+          return "Checkbox"
         case "checklist":
           return "CheckList"
         case "selectList":
           return "SelectList"
         case "object": 
           return "ObjectComponent"
-
         case "number": 
           return "NumberInput"
-
         case "date": 
           return "SelectDate"
       }

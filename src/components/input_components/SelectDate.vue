@@ -40,22 +40,34 @@ export default {
 			let initValue = null;
 			switch (this.$options.name) {
 				case "TextInput":
-					initValue = null;
-          this.$set(this.value, this.currentFieldName, initValue);
-          break;
-        case "NumberInput":
-					initValue = null;
-          this.$set(this.value, this.currentFieldName, initValue);
-          break;
+					initValue = "";
+					this.$set(this.value, this.currentFieldName, initValue);
+					break;
+				case "NumberInput":
+					initValue = "";
+					this.$set(this.value, this.currentFieldName, initValue);
+					break;
+				case "Checkbox":
+					initValue = false;
+					this.$set(this.value, this.currentFieldName, initValue);
+					break;
 				case "CheckList":
 					initValue = [];
-          this.$set(this.value, this.currentFieldName, initValue);
-          break;
+					this.$set(this.value, this.currentFieldName, initValue);
+					break;
 				case "RadioInput":
 					initValue = "";
-          this.$set(this.value, this.currentFieldName, initValue);
-          break;
-			}
+					this.$set(this.value, this.currentFieldName, initValue);
+					break;
+				case "SelectDate":
+					initValue = "";
+					this.$set(this.value, this.currentFieldName, initValue);
+					break;
+				case "SelectList":
+					initValue = "";
+					this.$set(this.value, this.currentFieldName, initValue);
+					break;
+      }
     } 
 	},
 	computed: {
