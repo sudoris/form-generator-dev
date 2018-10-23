@@ -1,38 +1,38 @@
 <template>
-  <div v-if="showInputField">
-    <label
-      :for="schema.attrs.fieldName">
-      {{ schema.attrs.label }}
-      <input
-        id="checkbox-input"
-        type="checkbox"
-        :name="schema.attrs.fieldName"
-        v-model="value[schema.attrs.fieldName]">
-    </label>
-  </div>
+	<div v-if="showInputField">
+		<label
+			:for="schema.attrs.fieldName">
+			{{ schema.attrs.label }}
+			<input
+				id="checkbox-input"
+				type="checkbox"
+				:name="schema.attrs.fieldName"
+				v-model="value[schema.attrs.fieldName]">
+		</label>
+	</div>
 </template>
 
 <script>
 export default {
 	name: "Checkbox",
-  props: {
-    schema: {
-      type: Object,
-      default() {
+	props: {
+		schema: {
+			type: Object,
+			default() {
 				return {}
-      }
-    },
-    value: {
-      type: Object,
-      default() {
-        return {}
-      }
-    }
-  },
-  data () {
-    return {
+			}
+		},
+		value: {
+			type: Object,
+			default() {
+				return {}
+			}
+		}
+	},
+	data () {
+		return {
 			currentFieldName: this.schema.attrs.fieldName
-    }
+		}
 	},
 	methods: {
 		clearInput() {
@@ -67,8 +67,8 @@ export default {
 					initValue = "";
 					this.$set(this.value, this.currentFieldName, initValue);
 					break;
-      }
-    }
+			}
+		}
 	},
 	computed: {
 		showInputField() {
@@ -101,7 +101,7 @@ export default {
 			}
 			return true
 		},
-	} 
+	}
 }
 </script>
 

@@ -1,7 +1,7 @@
 
 import { exists } from 'fs';
 <template>
-  <div> 
+	<div> 
 		<div class="display-inline" v-if="showInputField">
 			<label 
 				:for="schema.attrs.fieldName">
@@ -13,7 +13,7 @@ import { exists } from 'fs';
 				:name="schema.attrs.fieldName" 
 				v-model="value[schema.attrs.fieldName]">
 		</div>
-  </div>
+	</div>
 </template>
 
 <script>
@@ -24,20 +24,20 @@ export default {
 			type: Object,
 			default() {
 				return {}
-      }
-    },
-    value: {
-      type: Object,
-      default() {
-        return {}
-      }
-    }
-  },
-  data () {
-    return {
+			}
+		},
+		value: {
+			type: Object,
+			default() {
+				return {}
+			}
+		}
+	},
+	data () {
+		return {
 			placeholder: this.getPlaceholder(),
 			currentFieldName: this.schema.attrs.fieldName
-    }
+		}
 	},
 	methods: {
 		clearInput() {

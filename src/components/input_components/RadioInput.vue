@@ -18,25 +18,25 @@
 <script>
 export default {
 	name: "RadioInput",
-  //value = schemaData. v-model default prop is value
-  props: {
-    schema: {
-      type: Object,
-      default() {
-        return {}
-      }
-    },
-    value: {
-      type: Object,
-      default() {
-        return  {}
-      }
-    }
-  },
-  data () {
-    return {
+	//value = schemaData. v-model default prop is value
+	props: {
+		schema: {
+			type: Object,
+			default() {
+				return {}
+			}
+		},
+		value: {
+			type: Object,
+			default() {
+				return  {}
+			}
+		}
+	},
+	data () {
+		return {
 			currentFieldName: this.schema.attrs.fieldName
-    }
+		}
 	},
 	methods: {
 		clearInput() {

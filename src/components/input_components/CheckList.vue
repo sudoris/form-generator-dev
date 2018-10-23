@@ -1,49 +1,49 @@
 <template>
-  <div v-if="showInputField">
-    <div
-      class="display-inline" 
-      v-for="(item, index) in schema.attrs.values" 
-      :key="index">
-      <input 
-        type="checkbox" 
-        :id="item" 
-        :value="item" 
-        v-model="value[schema.attrs.fieldName]">
-      <label :for="item">{{ item }}</label>
-    </div>
-  </div>
+	<div v-if="showInputField">
+		<div
+			class="display-inline" 
+			v-for="(item, index) in schema.attrs.values" 
+			:key="index">
+			<input 
+				type="checkbox" 
+				:id="item" 
+				:value="item" 
+				v-model="value[schema.attrs.fieldName]">
+			<label :for="item">{{ item }}</label>
+		</div>
+	</div>
 </template>
 
 <script>
 
 export default {
-  name: "CheckList",
-  props: {
-    schema: {
-      type: Object,
-      default() {
-        return {}
-      }
-    },
-    value: {
-      type: Object,
-      default() {
-        return  {}
-      }
-    }
-  },
-  data () {
-    return {
-      currentFieldName: this.schema.attrs.fieldName            
-    }
-  },
-  created: function() {
-    if (!(this.currentFieldName in this.value)) {
-      // this.value[this.currentFieldName] = {}
-      // this.$emit('input', this.value)
-      this.$set(this.value, this.currentFieldName, []);
-      //this.value["keyOnCreate"] = {};
-    }
+	name: "CheckList",
+	props: {
+		schema: {
+			type: Object,
+			default() {
+				return {}
+			}
+		},
+		value: {
+			type: Object,
+			default() {
+				return  {}
+			}
+		}
+	},
+	data () {
+		return {
+			currentFieldName: this.schema.attrs.fieldName            
+		}
+	},
+	created: function() {
+		if (!(this.currentFieldName in this.value)) {
+			// this.value[this.currentFieldName] = {}
+			// this.$emit('input', this.value)
+			this.$set(this.value, this.currentFieldName, []);
+			//this.value["keyOnCreate"] = {};
+		}
 	},
 	methods: {
 		clearInput() {
@@ -78,8 +78,8 @@ export default {
 					initValue = "";
 					this.$set(this.value, this.currentFieldName, initValue);
 					break;
-      }
-    } 
+			}
+		} 
 	},
 	computed: {
 		showInputField() {

@@ -1,38 +1,38 @@
 
 <template>
-  <div>
-    <div class="display-inline" v-if="showInputField">
-      <label :for="schema.attrs.fieldName">{{ schema.attrs.label }}</label>
-      <input
-        id="number-input" 
-        type="date" 
-        :name="schema.attrs.fieldName" 
-        v-model="value[schema.attrs.fieldName]">
-    </div>
-  </div>
+	<div>
+		<div class="display-inline" v-if="showInputField">
+			<label :for="schema.attrs.fieldName">{{ schema.attrs.label }}</label>
+			<input
+				id="number-input" 
+				type="date" 
+				:name="schema.attrs.fieldName" 
+				v-model="value[schema.attrs.fieldName]">
+		</div>
+	</div>
 </template>
 
 <script>
 export default {
 	name: "SelectDate",
-  props: {
-    schema: {
-      type: Object,
-      default() {
+	props: {
+		schema: {
+			type: Object,
+			default() {
 				return {}
-      }
-    },
-    value: {
-      type: Object,
-      default() {
-        return {}
-      }
-    }
-  },
-  data () {
-    return {
+			}
+		},
+		value: {
+			type: Object,
+			default() {
+				return {}
+			}
+		}
+	},
+	data () {
+		return {
 			currentFieldName: this.schema.attrs.fieldName
-    }
+		}
 	},
 	methods: {
 		clearInput() {
@@ -67,8 +67,8 @@ export default {
 					initValue = "";
 					this.$set(this.value, this.currentFieldName, initValue);
 					break;
-      }
-    } 
+			}
+		} 
 	},
 	computed: {
 		showInputField() {
