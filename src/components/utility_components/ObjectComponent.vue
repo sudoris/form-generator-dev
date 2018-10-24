@@ -1,5 +1,6 @@
 <template>
 	<div v-if="showInputField"> 
+		<legend class="field-title">{{ schema.title }}</legend>  
 		<div v-for="(field, key) in schema.properties" :key="key">   
 			<component 
 				:is="getComponentName(field.attrs.fieldType)" 
@@ -15,6 +16,7 @@ import TextInput from "../input_components/TextInput"
 import RadioInput from "../input_components/RadioInput"
 import Checkbox from "../input_components/Checkbox"
 import CheckList from "../input_components/CheckList"
+import CheckListWithOther from "../input_components/CheckListWithOther"
 import NumberInput from "../input_components/NumberInput"
 import SelectDate from "../input_components/SelectDate"
 import SelectList from "../input_components/SelectList"
@@ -30,6 +32,7 @@ export default {
 		NumberInput,
 		SelectList,
 		SelectDate,
+		CheckListWithOther
 	},
 	props: {
 		schema: {
@@ -77,6 +80,8 @@ export default {
 					return "NumberInput"
 				case "date": 
 					return "SelectDate"
+				case "checklistwithother":
+					return "CheckListWithOther"
 			}
 		},
 		clearInput() {
@@ -90,9 +95,9 @@ export default {
 		showInputField() {
 			let schemaAttrs = this.schema.attrs;
 			//dependsOn name is Array?
-			if(typeof schemaAttrs !== 'undefined'){
-				if(typeof schemaAttrs.dependsOn !== 'undefined'){
-					if(typeof schemaAttrs.dependsOn.values !== 'undefined' && typeof schemaAttrs.dependsOn.name !== 'undefined'){
+			if(schemaAttrs){
+				if(schemaAttrs.dependsOn){
+					if(schemaAttrs.dependsOn.values && schemaAttrs.dependsOn.name){
 						if(Array.isArray(this.value[schemaAttrs.dependsOn.name])){
 							for(let i = 0; i < schemaAttrs.dependsOn.values.length; i++) {
 								if(this.value[schemaAttrs.dependsOn.name].indexOf(schemaAttrs.dependsOn.values[i]) !== -1){

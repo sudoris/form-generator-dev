@@ -3,7 +3,7 @@
 	<div class="display-inline" v-if="showInputField">
 		<label
 			:for="schema.attrs.fieldName">
-			{{ schema.attrs.label }}
+			{{ schema.title }}
 		</label>
 		<input
 			id="number-input"

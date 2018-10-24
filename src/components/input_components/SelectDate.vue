@@ -2,7 +2,7 @@
 <template>
 	<div>
 		<div class="display-inline" v-if="showInputField">
-			<label :for="schema.attrs.fieldName">{{ schema.attrs.label }}</label>
+			<label :for="schema.attrs.fieldName">{{ schema.title }}</label>
 			<input
 				id="number-input" 
 				type="date" 

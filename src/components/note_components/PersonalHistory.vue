@@ -28,7 +28,7 @@ export default {
 							type: "object",              
 							title: "Habits",
 							attrs: {
-								fieldType: "object",
+								// fieldType: "object",
 								fieldName: "habits"                
 							},
 							properties: {
@@ -69,10 +69,10 @@ export default {
 							properties: {
 								exercise: {
 									description: "exercise habits",
-									type: "string",                  
+									type: "string",             
+									title: "More than once a week",     
 									attrs: {
-										fieldType: "radio",
-										label: "More than once a week",
+										fieldType: "radio",										
 										values: ["Yes", "No"],
 										fieldName: "exercise"
 									}

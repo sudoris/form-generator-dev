@@ -1,6 +1,6 @@
 <template>
 	<div v-if="showInputField">
-		<label>{{ schema.attrs.label }}</label>
+		<label>{{ schema.title }}</label>
 		<div 
 			class="display-inline" 
 			v-for="(item, index) in schema.attrs.values" 

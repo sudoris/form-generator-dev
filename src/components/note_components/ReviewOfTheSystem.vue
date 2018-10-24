@@ -28,8 +28,7 @@ export default {
 							type: "object",
 							title: "General",                          
 							attrs: {
-								fieldName: "general",
-								fieldType: "object",                
+								fieldName: "general"								              
 							},
 							properties: {
 								state: {
@@ -44,7 +43,8 @@ export default {
 								},
 								abnormalities: {
 									description: "abnormalities of the patient",
-									type: "string",
+									type: "string",		
+									title: "Abnormalities",							
 									attrs: {
 										fieldType: "checklist",
 										fieldName: "abnormalities",
@@ -66,7 +66,7 @@ export default {
 											"Stress",
 											"Nervousness",
 											"Depression",
-											"Other",
+											"Other"											
 										],
 										dependsOn: {
 											name: "state",

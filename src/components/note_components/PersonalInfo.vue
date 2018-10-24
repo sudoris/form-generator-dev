@@ -25,21 +25,21 @@ export default {
 				properties: {
 					name: {
 						description: "", // legend data
-						type: "string", //type of input            
+						type: "string", //type of input
+						title: "Name",            
 						attrs: {
 							fieldName: "name",
-							fieldType: "text",
-							label: "Name",
+							fieldType: "text",							
 							title: "fleajlfajljfi"
 						}
 					},
 					age: {
 						description: "", // legend data
-						type: "integer", //type of input            
+						type: "integer", //type of input
+						title: "Age",           
 						attrs: {
 							fieldName: "age",
-							fieldType: "number",
-							label: "Age",
+							fieldType: "number",							
 							dependsOn: {
 								name: "name",
 								values: ["david"]
@@ -48,11 +48,11 @@ export default {
 					},
 					date: {
 						description: "", // legend data
-						type: "string", //type of input            
+						type: "string", //type of input
+						title: "Date of birth",            
 						attrs: {
 							fieldName: "date",
-							fieldType: "date",
-							label: "Date of birth",
+							fieldType: "date",							
 							// dependsOn: {
 							//   name: "name",
 							//   values: ["david"]

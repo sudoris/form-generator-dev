@@ -1,10 +1,9 @@
 <template>
 	<div>
 		<h2>{{ jsonSchema.title }}</h2>        
-		<div v-for="(field, key) in jsonSchema.properties" :key="key">   
-			<legend class="field-title">{{ field.title }}</legend>          
+		<div v-for="(field, key) in jsonSchema.properties" :key="key">   			        
 			<component 
-				:is="getComponentName(field.attrs.fieldType)"
+				:is="getComponentName(field)"
 				:schema="field" 
 				v-model="jsonSchemaData" ></component>
 		</div>
@@ -17,6 +16,7 @@ import TextInput from "./input_components/TextInput"
 import RadioInput from "./input_components/RadioInput"
 import Checkbox from "./input_components/Checkbox"
 import CheckList from "./input_components/CheckList"
+import CheckListWithOther from "./input_components/CheckListWithOther"
 import NumberInput from "./input_components/NumberInput"
 import SelectDate from "./input_components/SelectDate"
 import SelectList from "./input_components/SelectList"
@@ -32,7 +32,8 @@ export default {
 		NumberInput,
 		SelectDate,
 		SelectList,
-		ObjectComponent
+		ObjectComponent,
+		CheckListWithOther
 	},
 	props: {
 		schema: {
@@ -58,10 +59,24 @@ export default {
 	},
 	methods: {        
 		// TODO: should be able to default to JSON type (string, int, array etc.) if no custom fieldType given
-		getComponentName(type) {
-			switch (type) {
+		getComponentName(field) {
+			if (!(field.attrs && field.attrs.fieldType)) {
+				if (field.type === 'string') {
+					return "TextInput"
+				}
+				else if (field.type === 'number' || field.type === 'integer') {
+					return "NumberInput"
+				}			
+				else if (field.type === 'object') {
+					return "ObjectComponent"
+				}			
+			}
+
+			switch (field.attrs.fieldType) {
 				case "text":
 					return "TextInput"
+				case "checklistwithother":
+					return "CheckListWithOther"
 				case "radio":
 					return "RadioInput"
 				case "checkbox":
@@ -92,5 +107,7 @@ export default {
 body {
 	margin-left: 2%;
 }
-
+.padding-left {
+	padding-left: 3px;
+}
 </style>

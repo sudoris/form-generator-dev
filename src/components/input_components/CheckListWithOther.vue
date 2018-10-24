@@ -1,24 +1,42 @@
 <template>
-	<div v-if="showInputField">
-		<legend>{{ schema.title }}</legend>
-		<div
-			class="display-inline" 
-			v-for="(item, index) in schema.attrs.values" 
-			:key="index">
-			<input 
-				type="checkbox" 
-				:id="item" 
-				:value="item" 
-				v-model="value[schema.attrs.fieldName]">
-			<label :for="item">{{ item }}</label>
-		</div>
-	</div>
+  <div>
+    <div v-if="showInputField">          
+      <div    
+        class="display-inline" 
+        v-for="(item, index) in schema.attrs.values" 
+        :key="index">
+        <input 
+          type="checkbox" 
+          :id="item" 
+          :value="item" 
+          v-model="value[schema.attrs.fieldName]">
+        <label :for="item">{{ item }}</label>
+      </div>
+      <div class="display-inline padding-left">
+        <label 
+          for="other">Other:				
+        </label>
+        <input 
+          id="other" 
+          type="text" 
+          name="other" 
+          v-model="other">
+      </div>    	 
+      {{ other }}  
+      
+    </div>
+    {{ value }}
+  </div>
 </template>
 
 <script>
+import TextInput from "./TextInput"
 
 export default {
-	name: "CheckList",
+  name: "CheckListWithOther",
+  components: {
+    TextInput
+  },
 	props: {
 		schema: {
 			type: Object,
@@ -35,6 +53,7 @@ export default {
 	},
 	data () {
 		return {
+      other: null,
 			currentFieldName: this.schema.attrs.fieldName            
 		}
 	},
@@ -47,42 +66,18 @@ export default {
 		}
 	},
 	methods: {
-		clearInput() {
-		// this.value[this.schema.attrs.fieldName] = null
-			let initValue = null;
-			switch (this.$options.name) {
-				case "TextInput":
-					initValue = "";
-					this.$set(this.value, this.currentFieldName, initValue);
-					break;
-				case "NumberInput":
-					initValue = "";
-					this.$set(this.value, this.currentFieldName, initValue);
-					break;
-				case "Checkbox":
-					initValue = false;
-					this.$set(this.value, this.currentFieldName, initValue);
-					break;
-				case "CheckList":
-					initValue = [];
-					this.$set(this.value, this.currentFieldName, initValue);
-					break;
-				case "RadioInput":
-					initValue = "";
-					this.$set(this.value, this.currentFieldName, initValue);
-					break;
-				case "SelectDate":
-					initValue = "";
-					this.$set(this.value, this.currentFieldName, initValue);
-					break;
-				case "SelectList":
-					initValue = "";
-					this.$set(this.value, this.currentFieldName, initValue);
-					break;
-			}
+		clearInput() {				
+      let initValue = [];
+      this.$set(this.value, this.currentFieldName, initValue);			
 		} 
-	},
+  },  
 	computed: {
+    addUpdateOther() {
+      if ((this.value[schema.attrs.fieldName]).includes(this.other)) {
+        
+      }
+      
+    },
 		showInputField() {
 			let schemaAttrs = this.schema.attrs;
 			//dependsOn name is Array?
